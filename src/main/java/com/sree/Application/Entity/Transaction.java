@@ -28,12 +28,10 @@ public class Transaction {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
-    // Constructor to initialize timestamp
     public Transaction() {
         this.timestamp = LocalDateTime.now(); // Set the timestamp at the creation of the transaction
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

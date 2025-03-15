@@ -2,22 +2,17 @@ package com.sree.Application.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sree.Application.Entity.User;
 import com.sree.Application.Service.UserService;
+import com.sree.Application.DTO.UserDTO;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
-	@Autowired
+
+    @Autowired
     private UserService userService;
 
     // Register new user
@@ -38,18 +33,18 @@ public class UserController {
         }
     }
 
-    // View user profile
+    // View user profile using DTO to avoid cyclic reference issues
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        User user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO userDTO = userService.getUserById(id);
+        return ResponseEntity.ok(userDTO);
     }
 
     // Update user profile
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        User user = userService.updateUser(id, updatedUser);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        UserDTO userDTO = userService.updateUser(id, updatedUser);
+        return ResponseEntity.ok(userDTO);
     }
 
     // Delete user
@@ -58,5 +53,4 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok("User deleted successfully");
     }
-
 }

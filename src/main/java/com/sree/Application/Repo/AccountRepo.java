@@ -10,4 +10,6 @@ import com.sree.Application.Entity.User;
 @Repository
 public interface AccountRepo extends JpaRepository<Account, Long> {
     List<Account> findByUser(User user);
+
+	List<Account> findByUserId(Long userId);
 }

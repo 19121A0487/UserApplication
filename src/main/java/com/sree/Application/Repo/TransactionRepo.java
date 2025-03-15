@@ -10,4 +10,6 @@ import com.sree.Application.Entity.Transaction;
 @Repository
 public interface TransactionRepo extends JpaRepository<Transaction, Long> {
     List<Transaction> findByAccount(Account account);
+
+	List<Transaction> findByAccountId(Long accountId);
 }
